@@ -6,7 +6,7 @@ const classNames = {
     "font-semibold block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0",
 };
 
-const Navbar = () => {
+const Navbar = ({ nameProp, pageProp }) => {
   return (
     <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded">
       <div className="container flex flex-wrap items-center justify-between mx-auto">
@@ -20,7 +20,10 @@ const Navbar = () => {
           </a>
           <a
             href="#"
-            className={`${classNames.navbarItems} ml-8 hidden md:block`}
+            // onClick={() => setPage(1)}
+            className={`${classNames.navbarItems} ${
+              pageProp == 1 && "text-md text-blue-500"
+            } ml-8 hidden md:block`}
             aria-current="page"
           >
             Track
@@ -63,7 +66,7 @@ const Navbar = () => {
                 <span role="img" aria-label="sheep">
                   👋
                 </span>{" "}
-                <span className="font-normal">Hi</span> Alex
+                <span className="font-normal">Hi</span> {nameProp}
               </a>
             </li>
             <span>|</span>
