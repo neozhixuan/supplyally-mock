@@ -1,12 +1,13 @@
 import logo from "./svg/supplyAlly-logo.svg";
 import React from "react";
-
+import { useState } from "react";
 const classNames = {
   navbarItems:
-    "font-semibold block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0",
+    "font-semibold block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0",
 };
 
-const Navbar = ({ nameProp, pageProp }) => {
+const Navbar = ({ nameProp, pageProp, setPage, resetApp }) => {
+  const [open, setOpen] = useState(0);
   return (
     <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded">
       <div className="container flex flex-wrap items-center justify-between mx-auto">
@@ -20,17 +21,21 @@ const Navbar = ({ nameProp, pageProp }) => {
           </a>
           <a
             href="#"
-            // onClick={() => setPage(1)}
-            className={`${classNames.navbarItems} ${
-              pageProp == 1 && "text-md text-blue-500"
-            } ml-8 hidden md:block`}
+            onClick={nameProp != "Guest" && (() => setPage(1))}
+            className={`${
+              pageProp == 1 ? "text-md text-blue-600" : "text-gray-700"
+            } ${classNames.navbarItems} ml-8 hidden md:block`}
             aria-current="page"
           >
             Track
           </a>
           <a
             href="#"
-            className={`${classNames.navbarItems} ml-8 hidden md:block`}
+            onClick={nameProp != "Guest" && (() => setPage(2))}
+            className={`${
+              pageProp == 2 ? "text-md text-blue-600" : "text-gray-700"
+            }
+            ${classNames.navbarItems} ml-8 hidden md:block`}
             aria-current="page"
           >
             Statistics
@@ -38,11 +43,9 @@ const Navbar = ({ nameProp, pageProp }) => {
         </div>
 
         <button
-          data-collapse-toggle="navbar-default"
           type="button"
           className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-          aria-controls="navbar-default"
-          aria-expanded="false"
+          onClick={open ? () => setOpen(0) : () => setOpen(1)}
         >
           <span className="sr-only">Open main menu</span>
           <svg
@@ -59,8 +62,40 @@ const Navbar = ({ nameProp, pageProp }) => {
             ></path>
           </svg>
         </button>
-        <div className="hidden w-full md:block md:w-auto" id="navbar-default">
+        <div
+          className={`${
+            open ? "block" : "hidden"
+          }  md:block w-full md: md:w-auto`}
+          id="navbar-default"
+        >
           <ul className="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-4 md:mt-0 md:border-0 md:bg-white">
+            <li>
+              <a
+                href="#"
+                onClick={nameProp != "Guest" && (() => setPage(1))}
+                className={`${
+                  pageProp == 1 ? "text-md text-blue-600" : "text-gray-700"
+                } ${classNames.navbarItems} ${
+                  open ? "block" : "hidden"
+                } md:hidden`}
+                aria-current="page"
+              >
+                Track
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                onClick={nameProp != "Guest" && (() => setPage(2))}
+                className={`${
+                  pageProp == 2 ? "text-md text-blue-600" : "text-gray-700"
+                }
+            ${classNames.navbarItems}${open ? "block" : "hidden"} md:hidden`}
+                aria-current="page"
+              >
+                Statistics
+              </a>
+            </li>
             <li>
               <a href="#" className={`${classNames.navbarItems}`}>
                 <span role="img" aria-label="sheep">
@@ -69,9 +104,13 @@ const Navbar = ({ nameProp, pageProp }) => {
                 <span className="font-normal">Hi</span> {nameProp}
               </a>
             </li>
-            <span>|</span>
+            <span className={`${open ? "hidden" : "block"} md:block`}>|</span>
             <li>
-              <a href="#" className={`${classNames.navbarItems}`}>
+              <a
+                onClick={resetApp}
+                href="#"
+                className={`${classNames.navbarItems}`}
+              >
                 Logout
               </a>
             </li>

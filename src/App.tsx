@@ -3,6 +3,7 @@ import React from "react";
 import Navbar from "./Navbar";
 import Track from "./Track";
 import { useState } from "react";
+import Statistics from "./Statistics";
 
 function App() {
   const [nameInput, setNameInput] = useState("");
@@ -19,14 +20,24 @@ function App() {
       setError("Please enter your full name.");
     } else {
       setFinalName(nameInput);
+      setNameInput("");
+      setError("");
       setPage(1);
     }
   };
-
+  const resetApp = () => {
+    setFinalName("Guest");
+    setPage(0);
+  };
   return (
     <div className="App">
       <div className="h-screen flex-col">
-        <Navbar nameProp={finalName} pageProp={page} />
+        <Navbar
+          nameProp={finalName}
+          pageProp={page}
+          setPage={setPage}
+          resetApp={resetApp}
+        />
         {/* setPage={setPage} */}
         {page == 0 && (
           <div className="w-full bg-gray-100 flex flex-1 h-[70%] justify-center items-center">
@@ -53,6 +64,7 @@ function App() {
           </div>
         )}
         {page == 1 && <Track />}
+        {page == 2 && <Statistics setPage={setPage} />}
         {/*  */}
         <footer className="p-4 shadow md:px-6 md:py-8 bg-gray-900">
           <div className="sm:flex sm:items-center sm:justify-between">
