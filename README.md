@@ -1,31 +1,43 @@
-# Create React App
+# SupplyAlly Mock App - Neo Zhi Xuan
 
-This directory is a brief example of a [Create React App](https://github.com/facebook/create-react-app) site that can be deployed to Vercel with zero configuration.
-
-## Deploy Your Own
-
-Deploy your own Create React App project with Vercel.
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/create-react-app&template=create-react-app)
-
-_Live Example: https://create-react-template.vercel.app/_
+This application was made using React.js and TypeScript, and deployed on Vercel.
+Check out the live application at https://supplyally-mock.vercel.app/.
 
 ## Available Scripts
 
 In the project directory, you can run:
-
+### `npm i`
 ### `npm start`
 
-Runs the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes. You may also see any lint errors in the console.
+This runs the app in development mode.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode. See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This runs the unit tests set up using React.js testing library.
 
-### `npm run build`
+## A run through of the document
 
-Builds the app for production to the `build` folder.
+The pages are abstracted into components in the "/pages" folder.
+The components like Navbar, Tracking Dates are abstracted into components in the "/components" folder.
+The "/theme" folder stores the repeated styles like the ones used for dark buttons.
 
-It correctly bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes.
+Unit tests are set up in App.test.tsx to test for successful logins and tracking flow.
+
+## My analysis of the task
+
+The task was to create a frontend application for a logistics company with its existing backend,
+converting from Mobile to Web application. As such, I had the basic assumptions:
+- Data would be fetched in json format, for simpler mapping to components
+- Mobile-first design for ease of compatibility to existing customer base
+
+As I looked more into the application, there were more application based assumptions I made:
+- Tracking ID should be strict to 11 digits to prevent unnecessary calls to the backend
+- We would have to mark as tracked before submitting tracking requests
+
+Overall, as a mock application, I went with a Single Page Application for better speed and ease of navigation.
+
+However, I believe the application could be improved with more time:
+- Upon calls for Tracking details, I could fetch data from a mock hosted database, and use React Router to "change pages" to a new tracking page.
+- The statistics page is lacking the function to change dates left and right.
+
+Hope you enjoyed the implementation!
