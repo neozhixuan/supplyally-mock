@@ -1,6 +1,13 @@
 import React from "react";
+import { BUTTON } from "../theme";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Statistics = ({ setPage }) => {
+type TrackerPaginationProps = {
+  setPage: (pageNumber: number) => void;
+};
+
+const Statistics = (props: TrackerPaginationProps) => {
   const IDData = [
     {
       id: "11190738200",
@@ -24,19 +31,25 @@ const Statistics = ({ setPage }) => {
     },
   ];
 
-  const classNames = {
-    buttonDark:
-      "text-white w-full focus:outline-none font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2 bg-gray-800 hover:bg-gray-700 focus:ring-1 focus:ring-gray-900 border-gray-700",
-  };
   return (
-    <div className="w-full bg-gray-100 flex h-auto justify-center items-center">
+    <div className="w-full bg-gray-100 flex h-auto p-[5%] justify-center items-center">
       <div className="w-[70%] flex flex-col">
-        <p className="font-bold my-5 text-xl">Statistics</p>
+        <p className="font-bold mb-5 text-2xl">Statistics</p>
         <div className="flex flex-col space-y-2 mb-5">
           <p className="text-xs">You tracked</p>
           <p className="font-bold text-5xl">211</p>
           <p className="text-xs">Last tracked at 6:30PM</p>
-          <div>- 14 Feb 2023 -</div>
+          <div className="flex flex-row justify-center items-center">
+            <button>
+              {" "}
+              <FontAwesomeIcon icon={faArrowLeft} />
+            </button>
+
+            <span className="mx-3">14 Feb 2023</span>
+            <button>
+              <FontAwesomeIcon icon={faArrowRight} />
+            </button>
+          </div>
         </div>
         <div className="w-full bg-white rounded-lg">
           <div className="flex">
@@ -54,8 +67,8 @@ const Statistics = ({ setPage }) => {
         </div>
         <div className="flex justify-end mt-5 mb-8">
           <button
-            onClick={() => setPage(1)}
-            className={`${classNames.buttonDark} w-full md:w-[20%]`}
+            onClick={() => props.setPage(1)}
+            className={`${BUTTON.buttonDark} w-full md:w-[20%]`}
           >
             Back
           </button>

@@ -1,12 +1,14 @@
-import logo from "./svg/supplyAlly-logo.svg";
-import React from "react";
 import { useState } from "react";
-const classNames = {
-  navbarItems:
-    "font-semibold block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0",
+import { NAVBAR } from "../theme";
+
+type navbarProps = {
+  nameProp: string;
+  pageProp: number;
+  setPage: (pageNumber: number) => void;
+  resetApp: () => void;
 };
 
-const Navbar = ({ nameProp, pageProp, setPage, resetApp }) => {
+const Navbar = ({ nameProp, pageProp, setPage, resetApp }: navbarProps) => {
   const [open, setOpen] = useState(0);
   return (
     <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded">
@@ -14,8 +16,8 @@ const Navbar = ({ nameProp, pageProp, setPage, resetApp }) => {
         <div className="flex items-center">
           <a href="/">
             <img
-              src={logo}
-              className="h-5 mr-3 ml-4 sm:ml-0 sm:h-6"
+              src={require("../imgs/supplyAlly-logo.png")}
+              className="h-5 mr-3 ml-4 sm:h-5"
               alt="SupplyAlly"
             />
           </a>
@@ -24,8 +26,7 @@ const Navbar = ({ nameProp, pageProp, setPage, resetApp }) => {
             onClick={nameProp != "Guest" && (() => setPage(1))}
             className={`${
               pageProp == 1 ? "text-md text-blue-600" : "text-gray-700"
-            } ${classNames.navbarItems} ml-8 hidden md:block`}
-            aria-current="page"
+            } ${NAVBAR.navbarItems} ml-8 hidden md:block`}
           >
             Track
           </a>
@@ -35,8 +36,7 @@ const Navbar = ({ nameProp, pageProp, setPage, resetApp }) => {
             className={`${
               pageProp == 2 ? "text-md text-blue-600" : "text-gray-700"
             }
-            ${classNames.navbarItems} ml-8 hidden md:block`}
-            aria-current="page"
+            ${NAVBAR.navbarItems} ml-8 hidden md:block`}
           >
             Statistics
           </a>
@@ -75,9 +75,9 @@ const Navbar = ({ nameProp, pageProp, setPage, resetApp }) => {
                 onClick={nameProp != "Guest" && (() => setPage(1))}
                 className={`${
                   pageProp == 1 ? "text-md text-blue-600" : "text-gray-700"
-                } ${classNames.navbarItems} ${
+                } ${NAVBAR.navbarItems} ${
                   open ? "block" : "hidden"
-                } md:hidden`}
+                } md:hidden text-left`}
                 aria-current="page"
               >
                 Track
@@ -90,14 +90,16 @@ const Navbar = ({ nameProp, pageProp, setPage, resetApp }) => {
                 className={`${
                   pageProp == 2 ? "text-md text-blue-600" : "text-gray-700"
                 }
-            ${classNames.navbarItems}${open ? "block" : "hidden"} md:hidden`}
+            ${NAVBAR.navbarItems}${
+                  open ? "block" : "hidden"
+                } md:hidden text-left`}
                 aria-current="page"
               >
                 Statistics
               </a>
             </li>
-            <li>
-              <a href="#" className={`${classNames.navbarItems}`}>
+            <li className="hidden md:block">
+              <a href="#" className={`${NAVBAR.navbarItems}`}>
                 <span role="img" aria-label="sheep">
                   👋
                 </span>{" "}
@@ -109,7 +111,7 @@ const Navbar = ({ nameProp, pageProp, setPage, resetApp }) => {
               <a
                 onClick={resetApp}
                 href="#"
-                className={`${classNames.navbarItems}`}
+                className={`${NAVBAR.navbarItems} text-left border`}
               >
                 Logout
               </a>
