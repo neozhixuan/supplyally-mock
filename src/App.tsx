@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -31,6 +31,9 @@ function App() {
     setFinalName("Guest");
     setPage(0);
   };
+  useEffect(() => {
+    document.title = "SupplyAlly";
+  }, []);
   return (
     <div className="App">
       <div className="h-screen flex-col">
